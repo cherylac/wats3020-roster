@@ -10,6 +10,13 @@
 // and `email` and makes those available as attributes. The `constructor()`
 // method should also break the username from before the `@` symbol in the
 // `email` value and use that to store on a `this.username` property.
+class Person {
+    constructor(name, email){
+        this.name = name;
+        this.email = email;
+        this.username = email.split('@')[0];
+    }
+}
 
 // TODO: Create another class that extends the `Person` class called `Student`.
 // The `Student` class should add a line to the `constructor()` method that sets
@@ -18,14 +25,31 @@
 // use the `super()` command so you don't lose the functionality of the
 // `constructor()` method from the `Person` class.)
 //
-
-
-// TODO: Create another method on the `Student` class called `calculateAttendance`.
+class Student extends Person {
+    constructor(name, email){
+        super(name, email);
+        this.attendance = [];
+    }
+    // TODO: Create another method on the `Student` class called `calculateAttendance`.
 // This method should give a percentage of how many days the student was present.
 // It should return a string like "90%" or "84.732%". Attendance should be
 // recorded into an Array using either a `0` for "absent" or a `1` for "present".
 // This should allow attendance percentage to be calculated as the average of
 // all the items in the `attendance` Array.
+calculateAttendance(){
+    if (this.attendance.lenth > 0) {
+        let counter = 0;
+        for (let mark of this.attendance){
+        counter = counter + mark;
+        }
+        let attendancePercentage = counter / this.attendance.length * 100;
+        return `${attendancePercentage}%`;
+    } else {
+        return "0%";
+    }
+}
+}
+
 
 
 // TODO: Create another class that extends the `Person` class called `Teacher`.
@@ -108,14 +132,14 @@ class Course {
 // `Course` object, you must gather the following information:
 //
 // TODO: Prompt the user for the `courseCode` (the number/code of the course, like "WATS 3000").
-
+let courseCode = prompt('What is the course code? (e.g. BSKT 1000)');
 // TODO: Prompt the user for the `courseTitle` (the name of the course, like "Introduction to JavaScript").
-
+let courseTitle = prompt('Title:', 'Intro to Basket Weaving');
 // TODO: Prompt the user for the  `courseDescription` (the descriptive summary of the course).
-
+let courseDescription = prompt('Introduction to basket weaving', 'Basket weaving for beginners and those wanting a refresher of various basket weaving techniques');
 // Create a new `Course` object instance called `myCourse` using the three data points just collected from the user.
 // TODO: Add in the values for the information supplied by the user above.
-
+let myCourse = new Course(courseCode, courseTitle, courseDescription);
 
 ///////////////////////////////////////////////////
 //////// Main Script /////////////////////////////
